@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-basic-pod
+  labels:
+    app: my-basic-pod
+spec:
+  containers:
+    - name: my-basic-pod
+      image: cutejjong/basic-app:v2

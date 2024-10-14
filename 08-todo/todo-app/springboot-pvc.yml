@@ -1,0 +1,12 @@
+# springboot-pvc.yml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: springboot-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: manual
+  resources:
+    requests:
+      storage: 2Gi

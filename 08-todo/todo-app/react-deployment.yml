@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react-app
+  template:
+    metadata:
+      labels:
+        app: react-app
+    spec:
+      containers:
+        - name: react-app
+          image: react-app:v1  # 고유 태그 사용
+          imagePullPolicy: IfNotPresent  # 로컬 이미지를 우선적으로 사용하도록 설정
+          ports:
+            - containerPort: 5175
+          env:
+            - name: VITE_API_URL
+              value: "http:/10.102.97.198:8080/api"

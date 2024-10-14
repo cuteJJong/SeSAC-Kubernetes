@@ -1,0 +1,36 @@
+# wordpress-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+spec:
+  replicas: 1
+  selector:
+    matchLabels: # 디플로이먼트가 관리할 pod라벨
+      app: wordpress
+  template:
+    metadata:
+      labels: # 디플로이먼트가 생성한 pod 라벨(서비스나 다른 디플로이먼트가 사용)
+        app: wordpress
+    spec:
+      containers:
+        - name: wordpress
+          image: wordpress:latest
+          env:
+          - name: WORDPRESS_DB_HOST
+            value: "mysql-service"
+          - name: WORDPRESS_DB_PASSWORD
+            value: "1234"
+          - name: WORDPRESS_DB_NAME
+            value: "wordpress"
+          - name: WORDPRESS_DB_USER
+            value: "wordpressuser"
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /var/www/html
+              name: wordpress-storage
+      volumes:
+        - name: wordpress-storage
+          persistentVolumeClaim:
+            claimName: wordpress-pvc

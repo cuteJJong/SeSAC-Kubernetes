@@ -1,0 +1,13 @@
+# mysql-pv-new.yml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv-new
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: manual
+  hostPath:
+    path: /mnt/data/mysql-new

@@ -1,0 +1,11 @@
+# mysql-service-new.yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-new
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: mysql-new
+  clusterIP: None

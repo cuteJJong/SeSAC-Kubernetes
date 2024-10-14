@@ -1,0 +1,13 @@
+# springboot-pv.yml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: springboot-pv
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: manual
+  hostPath:
+    path: /mnt/data/springboot

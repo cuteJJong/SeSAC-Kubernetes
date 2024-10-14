@@ -1,0 +1,31 @@
+# mysql-deployment-new.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-new
+spec:
+  selector:
+    matchLabels:
+      app: mysql-new
+  template:
+    metadata:
+      labels:
+        app: mysql-new
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:5.7
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "1234"  # Spring 설정 파일의 root 비밀번호와 일치
+            - name: MYSQL_DATABASE
+              value: "todolist"  # Spring 설정의 데이터베이스 이름
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: mysql-persistent-storage-new
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-persistent-storage-new
+          persistentVolumeClaim:
+            claimName: mysql-pvc-new

@@ -1,0 +1,13 @@
+# react-service.yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-service
+spec:
+  selector:
+    app: react-app
+  ports:
+    - protocol: TCP
+      port: 5175
+      targetPort: 5175
+  type: NodePort

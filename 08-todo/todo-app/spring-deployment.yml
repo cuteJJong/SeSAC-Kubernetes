@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-app
+spec:
+  replicas: 2  # 실행할 Pod의 수
+  selector:
+    matchLabels:
+      app: spring-boot-app
+  template:
+    metadata:
+      labels:
+        app: spring-boot-app
+    spec:
+      containers:
+        - name: spring-boot-container
+          image: cutejjong/spring-boot-app:latest  # 사용하려는 Docker 이미지
+          ports:
+            - containerPort: 8080  # Spring Boot 기본 포트
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql-new:3306/todolist
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "root"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "1234"
